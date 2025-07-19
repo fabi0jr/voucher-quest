@@ -3,7 +3,7 @@ import RewardCard from "../components/RewardCard";
 export default function Rewards({ rewards, completedCount }) {
   return (
     <div className="max-w-3xl mx-auto grid gap-6">
-      <h2 className="text-2xl font-bold text-pink-600 text-center mb-4">
+      <h2 className="text-2xl font-bold text-blue-600 text-center mb-4">
         Suas Recompensas 💝
       </h2>
 

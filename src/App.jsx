@@ -1,38 +1,117 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+
+import { useState, useEffect, useRef } from "react";
+import missions from "./data/missions";
+import rewards from "./data/Rewards";
+import Home from "./pages/Home";
+import Rewards from "./pages/Rewards";
+import ProgressBar from "./components/ProgressBar";
+import RewardModal from "./components/RewardModal";
+import AudioPlayer from "./components/AudioPlayer";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [completedTasks, setCompletedTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("completedTasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
 
+  const [isStarted, setIsStarted] = useState(false);
+  const [unlockedReward, setUnlockedReward] = useState(null);
+  const audioPlayerRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+    const newUnlockedReward = rewards.find(
+      (reward) => reward.requirement === completedTasks.length && completedTasks.length > 0
+    );
+
+    if (newUnlockedReward) {
+      setUnlockedReward(newUnlockedReward);
+    }
+  }, [completedTasks]);
+
+  const handleStart = () => {
+    setIsStarted(true);
+    if (audioPlayerRef.current) {
+      audioPlayerRef.current.play();
+    }
+  };
+  
+  const handleCompleteTask = (missionId) => {
+    if (!completedTasks.includes(missionId)) {
+        setCompletedTasks([...completedTasks, missionId]);
+    }
+  };
+
+  // ----- Lógica de apresentação (perfeita, sem alterações) -----
+  if (!isStarted) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center text-center relative">
+        <div className="w-full max-w-md p-6 bg-black bg-opacity-40 rounded-2xl shadow-lg">
+          <h1 className="text-5xl font-bold mb-4 text-white" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8)' }}>
+            Voucher Quest 💌
+          </h1>
+          <p className="text-xl text-white mb-8" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
+            Um presente de aniversário especial!
+          </p>
+          <button
+            onClick={handleStart}
+            className="bg-pink-500 text-white px-10 py-4 rounded-full font-semibold text-lg transition hover:bg-pink-600 shadow-xl transform hover:scale-105"
+          >
+            Começar a Aventura!
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const unlockedRewards = rewards.filter(
+    (reward) => reward.requirement <= completedTasks.length
+  );
+
+  const currentMission = missions.find(
+    (mission) => !completedTasks.includes(mission.id)
+  );
+
+  // ----- JSX principal (perfeito, sem alterações) -----
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 to-pink-300 flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-pink-700">Voucher Quest 💖</h1>
-      </div>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="min-h-screen bg-pink-50 p-4 sm:p-8 flex items-center justify-center">
+      <main className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 sm:p-10">
+        
+        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-4 text-pink-700">
+          Voucher Quest 💌
+        </h1>
+
+        <ProgressBar completed={completedTasks.length} total={missions.length} />
+
+        <div className="my-8 sm:my-12">
+          <Home
+            mission={currentMission}
+            completedTasks={completedTasks}
+            onCompleteTask={handleCompleteTask}
+          />
+        </div>
+
+        <div className="pt-8 sm:pt-12 border-t-2 border-pink-100">
+          <Rewards
+            rewards={unlockedRewards}
+            completedCount={completedTasks.length}
+          />
+        </div>
+      </main>
+
+      <RewardModal
+        reward={unlockedReward}
+        onClose={() => setUnlockedReward(null)}
+      />
+
+      <AudioPlayer 
+        ref={audioPlayerRef}
+        src="/background-music.mp3"
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;

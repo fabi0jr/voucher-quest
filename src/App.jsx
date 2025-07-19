@@ -50,14 +50,14 @@ function App() {
       <div className="min-h-screen flex flex-col items-center justify-center text-center relative">
         <div className="w-full max-w-md p-6 bg-black bg-opacity-40 rounded-2xl shadow-lg">
           <h1 className="text-5xl font-bold mb-4 text-white" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8)' }}>
-            Voucher Quest 💌
+            Missão: Aniversário
           </h1>
           <p className="text-xl text-white mb-8" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
             Um presente de aniversário especial!
           </p>
           <button
             onClick={handleStart}
-            className="bg-pink-500 text-white px-10 py-4 rounded-full font-semibold text-lg transition hover:bg-pink-600 shadow-xl transform hover:scale-105"
+            className="bg-blue-500 text-white px-10 py-4 rounded-full font-semibold text-lg transition hover:bg-blue-600 shadow-xl transform hover:scale-105"
           >
             Começar a Aventura!
           </button>
@@ -76,11 +76,11 @@ function App() {
 
   // ----- JSX principal (perfeito, sem alterações) -----
   return (
-    <div className="min-h-screen bg-pink-50 p-4 sm:p-8 flex items-center justify-center">
+    <div className="min-h-screen bg-blue-50 p-4 sm:p-8 flex items-center justify-center">
       <main className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 sm:p-10">
         
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-4 text-pink-700">
-          Voucher Quest 💌
+        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-4 text-blue-700">
+         Missão: Aniversário
         </h1>
 
         <ProgressBar completed={completedTasks.length} total={missions.length} />
@@ -93,7 +93,7 @@ function App() {
           />
         </div>
 
-        <div className="pt-8 sm:pt-12 border-t-2 border-pink-100">
+        <div className="pt-8 sm:pt-12 border-t-2 border-blue-100">
           <Rewards
             rewards={unlockedRewards}
             completedCount={completedTasks.length}

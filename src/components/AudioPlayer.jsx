@@ -39,7 +39,7 @@ function AudioPlayer({ src }, ref) {
       <audio ref={audioRef} src={src} loop />
       <button 
         onClick={togglePlayPause}
-        className="fixed bottom-4 right-4 bg-pink-500 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center focus:outline-none z-50"
+        className="fixed bottom-4 right-4 bg-blue-500 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center focus:outline-none z-50"
         aria-label={isPlaying ? "Pausar música" : "Tocar música"}
       >
         {isPlaying ? '❚❚' : '▶'}

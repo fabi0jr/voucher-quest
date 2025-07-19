@@ -12,7 +12,7 @@ export default function RewardModal({ reward, onClose }) {
         <p className="text-gray-700 mb-6">{reward.description}</p>
         <button
           onClick={onClose}
-          className="bg-pink-500 text-white px-6 py-2 rounded-full font-semibold transition hover:bg-pink-600"
+          className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold transition hover:bg-blue-600"
         >
           Continuar Missões
         </button>

@@ -27,7 +27,7 @@ export default function MissionCard({ mission, isCompleted, onComplete }) {
   }
 
   return (
-    <div className="p-6 rounded-xl shadow-md border bg-white border-pink-300 text-center">
+    <div className={`p-6 rounded-xl shadow-md border bg-white border-blue-300 text-center`}>
       <h2 className="text-2xl font-bold mb-2">{mission.title}</h2>
       <p className="text-base mb-6 text-gray-700">{mission.description}</p>
       
@@ -41,7 +41,7 @@ export default function MissionCard({ mission, isCompleted, onComplete }) {
         />
         <button
           onClick={handleValidation}
-          className="px-6 py-2 rounded-full font-semibold text-white bg-pink-500 hover:bg-pink-600 transition"
+          className="px-6 py-2 rounded-full font-semibold text-white bg-blue-500 hover:bg-blue-600 transition"
         >
           Validar Missão
         </button>

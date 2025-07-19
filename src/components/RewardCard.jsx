@@ -16,7 +16,7 @@ export default function RewardCard({ reward, completedCount }) {
           <a
             href={reward.pdfUrl}
             download
-            className="ml-4 flex-shrink-0 bg-pink-500 text-white px-4 py-2 rounded-full font-semibold transition hover:bg-pink-600 shadow-md text-sm"
+            className="ml-4 flex-shrink-0 bg-blue-500 text-white px-4 py-2 rounded-full font-semibold transition hover:bg-blue-600 shadow-md text-sm"
           >
             Baixar Voucher
           </a>

@@ -1,9 +1,9 @@
 const missions = [
   {
     id: 1,
-    title: "🎨 Artista de Vanguarda",
+    title: "🎨 Picasso",
     description: "Faça um retrato meu usando o computador ou papel e caneta. A falta de talento é um bônus!",
-    password: "picasso", // Senha para a missão 1
+    password: "aipaipara", // Senha para a missão 1
   },
   {
     id: 2,
